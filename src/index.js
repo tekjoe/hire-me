@@ -1,17 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { Helmet } from "react-helmet";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const AppWithHelmet = () => {
+  return (
+    <>
+      <Helmet>
+        <title>Hire Me</title>
+        <meta
+          name="description"
+          content="Hire Me – A Frontend Mentor Challenge"
+        />
+        <style>
+          @import
+          url('https://fonts.googleapis.com/css2?family=Spartan:wght@500;700&display=swap');
+        </style>
+      </Helmet>
+      <App />
+    </>
+  );
+};
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(<AppWithHelmet />, document.getElementById("root"));
