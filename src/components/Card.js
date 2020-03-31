@@ -12,7 +12,7 @@ const Card = styled.div`
   border-left: ${props =>
     props.featured ? "5px solid hsl(180, 29%, 50%)" : "none"};
   box-shadow: 0 4px 15px 2px hsla(180, 29%, 50%, 15%);
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     padding: 2rem;
     flex-direction: row;
     justify-content: space-between;
@@ -22,8 +22,7 @@ const Card = styled.div`
 
 Card.Body = styled.div`
   border-bottom: 1px solid hsl(180, 10%, 80%);
-  margin-bottom: 1rem;
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     border-bottom: 0;
     margin-bottom: 0;
     display: flex;
@@ -42,17 +41,18 @@ Card.Tag = styled.span`
   display: block;
   color: hsl(180, 29%, 50%);
   font-weight: bold;
+  font-size: 0.9rem;
   background: hsl(180, 52%, 96%);
   padding: 0.5rem;
   margin-right: 1rem;
   border-radius: 0.25rem;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
   cursor: pointer;
   &:hover {
     background: hsl(180, 29%, 50%);
     color: white;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     margin-bottom: 0;
   }
 `;
@@ -64,7 +64,7 @@ Card.Logo = styled.img`
   display: block;
   position: relative;
   margin-top: -3rem;
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     margin-top: 0;
     margin-right: 1.5rem;
     width: 75px;
@@ -86,13 +86,13 @@ CompanyInfo.Title = styled.h3`
 `;
 
 CompanyInfo.Pills = styled.div`
-  display: flex;
+  display: inline-flex;
 `;
 
 CompanyInfo.Pill = styled.span`
   display: block;
-  font-size: 0.75rem;
-  padding: 0.4rem;
+  font-size: 0.7rem;
+  padding: 0.35rem 0.6rem;
   font-weight: bold;
   color: white;
   background: ${props =>
@@ -107,12 +107,16 @@ const JobInfo = styled.div``;
 JobInfo.Title = styled.h2`
   font-size: 1rem;
   margin-bottom: 1rem;
+  cursor: pointer;
+  &:hover {
+    color: hsl(180, 29%, 50%);
+  }
 `;
 
 JobInfo.MetaData = styled.div`
   display: flex;
   margin-bottom: 1rem;
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     margin-bottom: 0rem;
   }
 `;

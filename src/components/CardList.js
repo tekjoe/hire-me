@@ -8,7 +8,7 @@ const CardList = styled.section`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 3rem;
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     grid-gap: 2em;
   }
 `;
@@ -16,18 +16,22 @@ const CardList = styled.section`
 export default () => {
   const [filters, setFilters] = useState([]);
   const addFilter = e => {
-    setFilters([...filters, e.target.innerText]);
+    if (filters.includes(e.target.innerText)) {
+      return;
+    } else {
+      setFilters([...filters, e.target.innerText]);
+    }
   };
   const removeFilter = e => {
-    console.log(e.target);
+    const filteredArr = filters.filter(filter => filter !== e.target.innerText);
+    setFilters(filteredArr);
   };
   const clearFilters = () => {
+    console.log(filters);
     setFilters([]);
   };
-  let filteredJobs = data.filter(jobs => jobs.level.indexOf(filters) !== -1, [
-    filters
-  ]);
-  console.log(filteredJobs);
+  const filteredJobs = data.filter(job => job.role === filters[0]);
+
   return (
     <>
       <FilterBar

@@ -15,6 +15,7 @@ const FilterBar = styled.div`
 
 FilterBar.Tags = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 FilterBar.Tag = styled.div`
@@ -24,9 +25,17 @@ FilterBar.Tag = styled.div`
   font-weight: bold;
   background: hsl(180, 52%, 96%);
   margin-right: 1rem;
+  margin-bottom: 1rem;
   border-radius: 0.25rem;
+  cursor: pointer;
   p {
-    padding: 0.5rem;
+    padding: 0.3rem 0.5rem;
+  }
+  &:hover > div {
+    background: hsl(180, 14%, 20%);
+  }
+  @media (min-width: 1024px) {
+    margin-bottom: 0;
   }
 `;
 
@@ -39,12 +48,11 @@ FilterBar.ClearButton = styled.a`
 
 const RemoveFilterButton = styled.div`
   padding: 0.5rem;
+  display: flex;
+  align-items: center;
   cursor: pointer;
   background: hsl(180, 29%, 50%);
   border-radius: 0 0.25rem 0.25rem 0;
-  &:hover {
-    background: hsl(180, 14%, 20%);
-  }
 `;
 
 RemoveFilterButton.SVG = styled.svg`
@@ -60,8 +68,8 @@ export default ({ filters, removeFilter, clearFilters }) => {
         {filters
           ? filters.map(filter => (
               <FilterBar.Tag key={filter}>
-                <p>{filter}</p>
-                <RemoveFilterButton onClick={removeFilter}>
+                <p onClick={removeFilter}>{filter}</p>
+                <RemoveFilterButton>
                   <RemoveFilterButton.SVG
                     xmlns="http://www.w3.org/2000/svg"
                     height="13"
