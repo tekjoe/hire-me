@@ -136,10 +136,9 @@ JobInfo.MetaDatum = styled.span`
   }
 `;
 
-export default ({ job, addFilter }) => {
+export default ({ job, addFilter, src }) => {
   const {
     company,
-    logo,
     featured,
     position,
     role,
@@ -160,7 +159,7 @@ export default ({ job, addFilter }) => {
       data-tools={tools ? tools : null}
     >
       <Card.Body>
-        <Card.Logo src={photosnap} />
+        <Card.Logo src={src} />
         <Card.Content>
           <CompanyInfo>
             <CompanyInfo.Title>{company}</CompanyInfo.Title>
