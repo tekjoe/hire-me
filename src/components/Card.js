@@ -159,7 +159,7 @@ export default ({ job, addFilter, src }) => {
       data-tools={tools ? tools : null}
     >
       <Card.Body>
-        <Card.Logo src={src} />
+        <Card.Logo src={src} alt="Company Logo" />
         <Card.Content>
           <CompanyInfo>
             <CompanyInfo.Title>{company}</CompanyInfo.Title>
