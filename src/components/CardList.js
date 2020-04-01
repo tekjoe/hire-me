@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Card from "./Card";
-import data from "../data.json";
+import jobs from "../data.json";
 import FilterBar from "./FilterBar";
 
 const CardList = styled.section`
@@ -15,22 +15,55 @@ const CardList = styled.section`
 
 export default () => {
   const [filters, setFilters] = useState([]);
+  const [jobList, setJobList] = useState([]);
   const addFilter = e => {
-    if (filters.includes(e.target.innerText)) {
-      return;
-    } else {
-      setFilters([...filters, e.target.innerText]);
-    }
+    const key = Object.values(e.target.dataset);
+    const newFilter = { [key]: e.target.innerText };
+    if (!filters.some(filter => filter[key] === newFilter[key]))
+      setFilters([...filters, newFilter]);
   };
+
   const removeFilter = e => {
-    const filteredArr = filters.filter(filter => filter !== e.target.innerText);
-    setFilters(filteredArr);
+    const filterToRemove = e.target.innerText;
+    const newFilters = [];
+    filters.forEach(filter => {
+      if (Object.values(filter)[0] !== filterToRemove) newFilters.push(filter);
+    });
+    setFilters(newFilters);
   };
+
   const clearFilters = () => {
-    console.log(filters);
     setFilters([]);
   };
-  const filteredJobs = data.filter(job => job.role === filters[0]);
+
+  const filterJobs = () => {
+    const filteredList = [];
+
+    jobs.forEach(job => {
+      let included = true;
+
+      for (let filter of filters) {
+        switch (true) {
+          case job.role === filter.role:
+          case job.level === filter.level:
+          case job.languages && job.languages.includes(filter.languages):
+          case job.tools && job.tools.includes(filter.tools):
+            break;
+          default:
+            included = false;
+            break;
+        }
+      }
+
+      if (included) filteredList.push(job);
+    });
+
+    return filteredList;
+  };
+
+  useEffect(() => {
+    setJobList(filterJobs);
+  }, [filters]);
 
   return (
     <>
@@ -40,9 +73,16 @@ export default () => {
         clearFilters={clearFilters}
       />
       <CardList>
-        {data.map(job => (
+        {jobList.length < 1
+          ? jobs.map(job => (
+              <Card key={job.id} job={job} addFilter={addFilter} />
+            ))
+          : jobList.map(job => (
+              <Card key={job.id} job={job} addFilter={addFilter} />
+            ))}
+        {/* {jobs.map(job => (
           <Card key={job.id} job={job} addFilter={addFilter} />
-        ))}
+        ))} */}
       </CardList>
     </>
   );

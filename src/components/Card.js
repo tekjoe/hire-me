@@ -152,7 +152,13 @@ export default ({ job, addFilter }) => {
     new: isNew
   } = job;
   return (
-    <Card featured={featured}>
+    <Card
+      featured={featured}
+      data-role={role}
+      data-level={level}
+      data-languages={languages ? languages : null}
+      data-tools={tools ? tools : null}
+    >
       <Card.Body>
         <Card.Logo src={photosnap} />
         <Card.Content>
@@ -178,18 +184,26 @@ export default ({ job, addFilter }) => {
         </Card.Content>
       </Card.Body>
       <Card.Tags>
-        <Card.Tag onClick={addFilter}>{role}</Card.Tag>
-        <Card.Tag onClick={addFilter}>{level}</Card.Tag>
+        <Card.Tag onClick={addFilter} data-type="role">
+          {role}
+        </Card.Tag>
+        <Card.Tag onClick={addFilter} data-type="level">
+          {level}
+        </Card.Tag>
         {languages
           ? languages.map(language => (
-              <Card.Tag key={language} onClick={addFilter}>
+              <Card.Tag
+                key={language}
+                onClick={addFilter}
+                data-type="languages"
+              >
                 {language}
               </Card.Tag>
             ))
           : null}
         {tools
           ? tools.map(tool => (
-              <Card.Tag onClick={addFilter} key={tool}>
+              <Card.Tag onClick={addFilter} key={tool} data-type="tools">
                 {tool}
               </Card.Tag>
             ))

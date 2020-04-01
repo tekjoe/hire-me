@@ -67,8 +67,10 @@ export default ({ filters, removeFilter, clearFilters }) => {
       <FilterBar.Tags>
         {filters
           ? filters.map(filter => (
-              <FilterBar.Tag key={filter}>
-                <p onClick={removeFilter}>{filter}</p>
+              <FilterBar.Tag key={filters.indexOf(filter)}>
+                <p onClick={removeFilter} data-type={Object.keys(filter)}>
+                  {Object.values(filter)}
+                </p>
                 <RemoveFilterButton>
                   <RemoveFilterButton.SVG
                     xmlns="http://www.w3.org/2000/svg"
